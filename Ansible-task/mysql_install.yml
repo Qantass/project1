@@ -16,6 +16,7 @@
       name: mysql 
       state: started
       enabled: true
+
   - name: update mysql root password for all root accounts
     sudo: yes
     mysql_user: 
@@ -32,3 +33,8 @@
       - 127.0.0.1
       - ::1
       - localhost 
+  - name: create a new database  
+    mysql_db: name=mytestdb state=present login_user=root login_password="{{ mysql_root_password }}"
+  
+
+  

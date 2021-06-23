@@ -3,3 +3,7 @@ linux_MySQL ansible_host=18.117.181.133
 
 [tomcat]
 linux_TomCAT ansible_host=18.118.35.43
+
+[all:vars]
+ansible_become=yes
+ansible_user=ubuntu
