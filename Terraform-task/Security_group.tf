@@ -2,7 +2,7 @@
 resource "aws_security_group" "db" {
   name = "DB_Security_group"
   description = "My DB_Security_group"
-  vpc_id = "${aws_vpc.db_vpc.id}"
+  vpc_id = "${aws_vpc.main.id}"
 
   dynamic "ingress" {
       for_each = ["80", "8080", "3360"]

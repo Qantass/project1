@@ -17,6 +17,7 @@ resource "aws_instance" "mysql" {
     ami = data.aws_ami.latest_ubuntu.id # Linux Ubuntu Server 20.04 LTS 
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.db.id]
+    
   tags = {
     Name = "MySQL Server"
   }
@@ -30,6 +31,7 @@ resource "aws_instance" "tomcat" {
     ami = data.aws_ami.latest_ubuntu.id      # Linux Ubuntu Server 20.04 LTS
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.db.id]
+    
   tags = {
     Name = "TomCat Server"
   }
@@ -40,11 +42,9 @@ resource "aws_instance" "tomcat" {
 }
 
 #---------------------- V  P  C -------------------------------
-resource "aws_vpc" "db_vpc" {
-  cidr_block       = "10.0.0.0/16"    # VPC 
-  instance_tenancy = "default"
-
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
   tags = {
-    Name = "db_vps"
+    Name = "db_vpc"
   }
 }
