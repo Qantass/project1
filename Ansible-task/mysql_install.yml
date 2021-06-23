@@ -1,0 +1,34 @@
+---
+- hosts: mysql
+  vars:
+    mysql_root_password: fart
+  tasks:
+  - name: Install MySQL
+    apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=present
+    sudo: yes
+    loop:
+    - python-mysqldb
+    - mysql-server
+  
+  - name: Start the MySQL service
+    sudo: yes
+    service: 
+      name: mysql 
+      state: started
+      enabled: true
+  - name: update mysql root password for all root accounts
+    sudo: yes
+    mysql_user: 
+      name: root 
+      host: "{{ item }}" 
+      password: "{{ mysql_root_password }}"
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      check_implicit_admin: yes
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      priv: "*.*:ALL,GRANT"
+    loop:
+      - "{{ ansible_hostname }}"
+      - 127.0.0.1
+      - ::1
+      - localhost 
