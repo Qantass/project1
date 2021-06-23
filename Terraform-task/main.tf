@@ -14,7 +14,7 @@ resource "aws_eip" "static_tom"{
 #------------------------------------------------------------------
 
 resource "aws_instance" "mysql" {
-    ami = data.aws_ami.latest_ubuntu.id # Linux Ubuntu Server 20.04 LTS 
+    ami = data.aws_ami.latest_ubuntu.id      # Linux Ubuntu Server 20.04 LTS 
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.db.id]
     
