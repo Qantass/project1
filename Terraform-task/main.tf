@@ -59,7 +59,13 @@ resource "aws_eip" "tomcat" {
   associate_with_private_ip = "10.0.10.20"
   depends_on                = [aws_internet_gateway.gw]
 }
+resource "aws_eip" "db" {
+  instance = aws_instance.db.id
+  vpc      = true
 
+  associate_with_private_ip = "10.0.20.20"
+  depends_on                = [aws_internet_gateway.gw]
+}
 #------------------ SECURITY GROUP ----------------------------------------
 resource "aws_security_group" "db" {
   name = "DB_Security_group"
