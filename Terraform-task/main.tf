@@ -1,6 +1,6 @@
 #----------------------- A  W  S ---------------------------
 provider "aws" {
-    profile = "terraform"
+    profile = "terra"
     region = "us-east-2"
 }
 #-------------------------EIP -------------------------------
@@ -89,8 +89,8 @@ resource "aws_security_group" "db" {
 }
 
 resource "aws_security_group" "tomcat" {
-  name = "DB_Security_group"
-  description = "My DB_Security_group"
+  name = "TomCAT_Security_group"
+  description = "My TomCAT_Security_group"
   vpc_id = "${aws_vpc.main.id}"
 
   dynamic "ingress" {
