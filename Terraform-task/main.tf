@@ -3,15 +3,7 @@ provider "aws" {
     profile = "terra"
     region = "us-east-2"
 }
-#-------------------------EIP -------------------------------
-resource "aws_eip" "static_sql"{
-  instance = aws_instance.mysql.id
-  
-}
-resource "aws_eip" "static_tom"{
-  instance = aws_instance.tomcat.id
-  
-}
+
 
 #---------------------- V  P  C -------------------------------
 resource "aws_vpc" "main" {
@@ -56,6 +48,17 @@ resource "aws_network_interface" "db" {
     Name = "db_network_interface"
   }
 }
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.main.id
+}
+
+resource "aws_eip" "tomcat" {
+  instance = aws_instance.tomcat.id
+  vpc      = true
+
+  associate_with_private_ip = "10.0.10.20"
+  depends_on                = [aws_internet_gateway.gw]
+}
 
 #------------------ SECURITY GROUP ----------------------------------------
 resource "aws_security_group" "db" {
@@ -94,7 +97,7 @@ resource "aws_security_group" "tomcat" {
   vpc_id = "${aws_vpc.main.id}"
 
   dynamic "ingress" {
-      for_each = ["80", "8080"]
+      for_each = ["80", "8080", "22"]
       content {
           from_port =ingress.value
           to_port = ingress.value
@@ -126,11 +129,10 @@ resource "aws_instance" "mysql" {
     ami = data.aws_ami.latest_ubuntu.id      # Linux Ubuntu Server 20.04 LTS 
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.db.id]
-    network_interface {
-        network_interface_id = aws_network_interface.db.id
-        device_index         = 0
-    } 
-    
+    subnet_id   = aws_subnet.private_subnet.id
+    private_ip = "10.0.20.20"
+    key_name = aws_key_pair.id_rsa.id
+  
   tags = {
     Name = "MySQL Server"
   }
@@ -145,10 +147,10 @@ resource "aws_instance" "tomcat" {
     ami = data.aws_ami.latest_ubuntu.id      # Linux Ubuntu Server 20.04 LTS
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.tomcat.id]
-    network_interface {
-        network_interface_id = aws_network_interface.tomcat.id
-        device_index         = 0
-    }
+    subnet_id   = aws_subnet.public_subnet.id
+    private_ip = "10.0.10.20"
+    key_name = aws_key_pair.id_rsa.id
+  
     
   tags = {
     Name = "TomCat Server"
