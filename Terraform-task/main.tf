@@ -57,6 +57,66 @@ resource "aws_network_interface" "db" {
   }
 }
 
+#------------------ SECURITY GROUP ----------------------------------------
+resource "aws_security_group" "db" {
+  name = "DB_Security_group"
+  description = "My DB_Security_group"
+  vpc_id = "${aws_vpc.main.id}"
+
+  dynamic "ingress" {
+      for_each = ["3306"]
+      content {
+          from_port =ingress.value
+          to_port = ingress.value
+          protocol = "tcp"
+          cidr_blocks = ["10.0.0.0/16"]
+
+        }
+}
+   ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "tomcat" {
+  name = "DB_Security_group"
+  description = "My DB_Security_group"
+  vpc_id = "${aws_vpc.main.id}"
+
+  dynamic "ingress" {
+      for_each = ["80", "8080"]
+      content {
+          from_port =ingress.value
+          to_port = ingress.value
+          protocol = "tcp"
+          cidr_blocks = ["0.0.0.0/0"]
+
+        }
+}
+   ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 
 
 
@@ -84,7 +144,7 @@ resource "aws_instance" "mysql" {
 resource "aws_instance" "tomcat" {
     ami = data.aws_ami.latest_ubuntu.id      # Linux Ubuntu Server 20.04 LTS
     instance_type = "t2.micro"
-    vpc_security_group_ids = [aws_security_group.db.id]
+    vpc_security_group_ids = [aws_security_group.tomcat.id]
     network_interface {
         network_interface_id = aws_network_interface.tomcat.id
         device_index         = 0
