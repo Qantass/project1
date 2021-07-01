@@ -1,9 +1,0 @@
----
-- name: Install MySQL and TomCAT
-  hosts: mysql
-  become: yes
-
-  roles:
-    - { roles: mysql, when: ansible_system == "Linux" }
-    - { roles: tomcat, when: ansible_system == "Linux" }
-  

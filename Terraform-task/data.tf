@@ -1,6 +1,6 @@
 data "aws_availability_zones" "work" {}
 data "aws_region" "current" {}
-#data "aws_vpc" "task_vpc" {}
+
 
 data "aws_ami" "latest_ubuntu" {
     owners = ["099720109477"]

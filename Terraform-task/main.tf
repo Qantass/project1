@@ -1,6 +1,6 @@
 #----------------------- A  W  S ---------------------------
 provider "aws" {
-    profile = "terra"
+    profile = "terraform"
     region = "us-east-2"
 }
 
@@ -131,13 +131,13 @@ resource "aws_security_group" "tomcat" {
 
 #------------------------------------------------------------------
 
-resource "aws_instance" "mysql" {
+resource "aws_instance" "db" {
     ami = data.aws_ami.latest_ubuntu.id      # Linux Ubuntu Server 20.04 LTS 
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.db.id]
     subnet_id   = aws_subnet.private_subnet.id
     private_ip = "10.0.20.20"
-    key_name = aws_key_pair.id_rsa.id
+    #key_name = aws_key_pair.id.id
   
   tags = {
     Name = "MySQL Server"
@@ -155,7 +155,7 @@ resource "aws_instance" "tomcat" {
     vpc_security_group_ids = [aws_security_group.tomcat.id]
     subnet_id   = aws_subnet.public_subnet.id
     private_ip = "10.0.10.20"
-    key_name = aws_key_pair.id_rsa.id
+    #key_name = aws_key_pair.id.id
   
     
   tags = {
@@ -166,4 +166,3 @@ resource "aws_instance" "tomcat" {
     create_before_destroy = true
   }
 }
-

@@ -14,3 +14,4 @@ output "data_latest_ubuntu_ami_id" {
 output "aws_eip" {
   value = aws_eip.tomcat.public_ip
 }
+
