@@ -1,6 +1,6 @@
 ---
 - name: install tomcat server
-  hosts: all
+  hosts: tomcat
   become: yes
   become_method: sudo
 

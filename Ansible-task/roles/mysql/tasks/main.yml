@@ -1,9 +1,6 @@
 ---
-- hosts: mysql
-  vars:
-    mysql_root_password: anypassword
-  tasks:
-  - name: Install MySQL
+# tasks file for mysql
+- name: Install MySQL
     apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=present
     sudo: yes
     loop:
@@ -33,8 +30,8 @@
       - 127.0.0.1
       - ::1
       - localhost 
+    notify:
+      - Restart MySQL
+      
   - name: create a new database  
     mysql_db: name=mytestdb state=present login_user=root login_password="{{ mysql_root_password }}"
-  
-
-  
