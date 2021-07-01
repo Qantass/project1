@@ -137,7 +137,7 @@ resource "aws_instance" "db" {
     vpc_security_group_ids = [aws_security_group.db.id]
     subnet_id   = aws_subnet.private_subnet.id
     private_ip = "10.0.20.20"
-    #key_name = aws_key_pair.id.id
+    key_name = aws_key_pair.taskkey.id
   
   tags = {
     Name = "MySQL Server"
@@ -155,7 +155,7 @@ resource "aws_instance" "tomcat" {
     vpc_security_group_ids = [aws_security_group.tomcat.id]
     subnet_id   = aws_subnet.public_subnet.id
     private_ip = "10.0.10.20"
-    #key_name = aws_key_pair.id.id
+    key_name = aws_key_pair.taskkey.id
   
     
   tags = {
