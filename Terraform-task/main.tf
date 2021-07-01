@@ -70,7 +70,7 @@ resource "aws_eip" "db" {
 resource "aws_security_group" "db" {
   name = "DB_Security_group"
   description = "My DB_Security_group"
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
 
   dynamic "ingress" {
       for_each = ["3306"]
@@ -100,7 +100,7 @@ resource "aws_security_group" "db" {
 resource "aws_security_group" "tomcat" {
   name = "TomCAT_Security_group"
   description = "My TomCAT_Security_group"
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
 
   dynamic "ingress" {
       for_each = ["80", "8080", "22"]
