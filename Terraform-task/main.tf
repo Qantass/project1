@@ -136,7 +136,7 @@ resource "aws_security_group" "db" {
   vpc_id = aws_vpc.main.id
 
   dynamic "ingress" {
-      for_each = ["3306"]
+      for_each = ["3306", "22"]
       content {
           from_port =ingress.value
           to_port = ingress.value
