@@ -61,7 +61,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name - "Main GW"
+    Name = "Main GW"
   }
 }
 #-----------------------------EIP-------------------------------
@@ -199,8 +199,9 @@ resource "aws_instance" "db" {
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.db.id]
     subnet_id   = aws_subnet.private.id
+    associate_public_ip_address = true
     private_ip = "10.0.20.20"
-    key_name = local.taskkey
+    key_name = local.key_name
   
   tags = {
     Name = "MySQL Server"
@@ -217,8 +218,9 @@ resource "aws_instance" "tomcat" {
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.tomcat.id]
     subnet_id   = aws_subnet.public.id
+    associate_public_ip_address = true
     private_ip = "10.0.10.20"
-    key_name = local.taskkey
+    key_name = local.key_name
   
     
   tags = {

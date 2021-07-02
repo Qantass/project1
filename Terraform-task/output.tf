@@ -11,7 +11,7 @@ output "data_aws_region_name" {
 output "data_latest_ubuntu_ami_id" {
     value = data.aws_ami.latest_ubuntu.id
 }
-output "aws_eip" {
-  value = aws_eip.tomcat.public_ip
-}
+#output "aws_eip" {
+#  value = aws_eip.tomcat.public_ip
+#}
 
