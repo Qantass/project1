@@ -4,6 +4,7 @@ terraform {
     bucket = "testingcreation"
     key    = "task.tfstate"
     region = "us-east-2"
+    profile = "terraform"
   }
 }
 
