@@ -2,7 +2,7 @@
 
 locals {
   ssh_user = "ubuntu"
-  key_name = "taskkey"
+  key_name = "Taskkey"
   private_key_path = "`/var/lib/jenkins/Taskkey.pem"
 }
 
