@@ -1,3 +1,12 @@
+#---------------------------------------------------------------
+terraform {
+  backend "s3" {
+    bucket = "testingcreation"
+    key    = "task.tfstate"
+    region = "us-east-2"
+  }
+}
+
 #---------------------------LOCALS------------------------------
 
 locals {
