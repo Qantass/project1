@@ -1,9 +1,19 @@
+#---------------------------------------------------------------
+terraform {
+  backend "s3" {
+    bucket = "testingcreation"
+    key    = "task.tfstate"
+    region = "us-east-2"
+    profile = "terraform"
+  }
+}
+
 #---------------------------LOCALS------------------------------
 
 locals {
   ssh_user = "ubuntu"
-  key_name = "taskkey"
-  private_key_path = "`/WorkLab/taskkey.pem"
+  key_name = "Taskkey"
+  private_key_path = "`/var/lib/jenkins/Taskkey.pem"
 }
 
 #----------------------- A  W  S ---------------------------
