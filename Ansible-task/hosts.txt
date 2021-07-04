@@ -1,8 +1,8 @@
 [mysql]
-linux_MySQL ansible_host=mysql_ip
+linux_MySQL ansible_host=mysql
 
 [tomcat]
-linux_TomCAT ansible_host=tomcat_ip
+linux_TomCAT ansible_host=tomcat
 
 [all:vars]
 ansible_become=yes
