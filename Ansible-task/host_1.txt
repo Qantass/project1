@@ -1,0 +1,9 @@
+[mysql]
+linux_MySQL ansible_host=mysql_ip
+
+[tomcat]
+linux_TomCAT ansible_host=tomcat_ip
+
+[all:vars]
+ansible_become=yes
+ansible_user=ubuntu
