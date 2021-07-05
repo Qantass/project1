@@ -4,6 +4,6 @@
   become: yes
 
   roles:
-    - roles: mysql, when: ansible_hostname == "ip-10-0-20-20" 
-    - roles: tomcat, when: ansible_hostname == "ip-10-0-10-20"
+    - { roles: mysql, when: ansible_hostname == "ip-10-0-20-20" }
+    - { roles: tomcat, when: ansible_hostname == "ip-10-0-10-20" }
   
