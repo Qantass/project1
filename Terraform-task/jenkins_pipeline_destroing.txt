@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Check out') {
+            steps {
+                checkout([$class: 'GitSCM',
+                        branches: [[name: '*/main']],
+                        browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/Qantass/project1.git'],
+                        extensions: [],
+                        userRemoteConfigs: [[credentialsId: '1000', url: 'https://github.com/Qantass/project1.git']]])
+            sh "ls -la"
+            }
+        }
+        stage('Terraform') {
+            steps {
+                sh """
+                    cd Terraform-task
+                    terraform init
+                    ls -la
+                    terraform destroy --auto-approve"""
+            }
+        }
+    }
+}
