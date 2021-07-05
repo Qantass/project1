@@ -2,4 +2,4 @@ JAVA_HOME: /usr/lib/jvm/default-java
 db_name: trainee
 db_user: qant
 db_pasword: "{{ vault_db_pass }}"
-client_host: < ip >
+client_host: 10.0.20.20
