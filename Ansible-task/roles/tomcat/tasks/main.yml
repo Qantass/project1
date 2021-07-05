@@ -2,7 +2,7 @@
 # tasks file for tomcat
 - name: Install OpenJDK
     apt:
-      name: openjdk-11-jre-headless
+      name: openjdk-10-jre-headless
 
   - name: download tomcat server packages
     get_url:

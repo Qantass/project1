@@ -2,4 +2,4 @@
 # defaults file for mysql
 mysql_root_password: anypassword
 ansible_user                 : ubuntu
-ansible_ssh_private_key_file : /home/ubuntu/.ssh/taskkey
+ansible_ssh_private_key_file : /home/ubuntu/.ssh/Taskkey
