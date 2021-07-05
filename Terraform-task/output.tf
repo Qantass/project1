@@ -1,7 +1,7 @@
-output "instance_ip" {
-  description = "The public ip for ssh access"
-  value       = aws_instance.tomcat.public_ip
-}
+#output "instance_ip" {
+#  description = "The public ip for ssh access"
+#  value       = aws_instance.tomcat.public_ip
+#}
 output "data_aws_availability_zones" {
     value = data.aws_availability_zones.work.names
 }
