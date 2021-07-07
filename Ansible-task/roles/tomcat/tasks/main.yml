@@ -4,16 +4,16 @@
     apt:
       name: openjdk-10-jre-headless
 
-  - name: download tomcat server packages
+- name: download tomcat server packages
     get_url:
       url: "https://www-us.apache.org/dist/tomcat/tomcat-10/v10.0.4/bin/apache-tomcat-10.0.4.tar.gz"
       dest: /usr/local
 
-  - name: extract tomcat packages
+- name: extract tomcat packages
     unarchive:
       src: /usr/local/apache-tomcat-10.0.4.tar.gz
       dest: /usr/local
       remote_src: yes
 
-  - name: start tomcat services
+- name: start tomcat services
     shell: nohup /usr/local/apache-tomcat-10.0.4/bin/startup.sh

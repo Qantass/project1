@@ -13,7 +13,7 @@ terraform {
 locals {
   ssh_user = "ubuntu"
   key_name = "Taskkey"
-  private_key_path = "`/var/lib/jenkins/Taskkey.pem"
+  private_key_path = "/var/lib/jenkins/Taskkey.pem"
 }
 
 #----------------------- A  W  S ---------------------------
