@@ -46,7 +46,7 @@ pipeline {
         stage("Post"){
             steps{
                 //send mail
-        //        mail bcc: '', body: "Build Complete!!! ${env.BUILD_URL}", cc: '', from: '', replyTo: '', subject: 'Jenkins', to: 'rkiblyk@gmail.com'
+        
                   mail bcc: '', body: 'Job complete successfuly !!!!!', cc: '', from: '', replyTo: '', subject: 'Jenkins', to: 'rkiblyk@gmail.com'
                 }
         }
