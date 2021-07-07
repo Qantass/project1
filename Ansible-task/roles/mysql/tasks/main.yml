@@ -8,8 +8,10 @@
   - name: Install MySQL
     sudo: yes
     apt:
-     name: "{{ item }}" update_cache: yes cache_valid_time: 3600
+     name: "{{ item }}" 
      state: present
+     update_cache: yes 
+     cache_valid_time: 3600
      loop:
       - python-mysqldb
       - mysql-server
