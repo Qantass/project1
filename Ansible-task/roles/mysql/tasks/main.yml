@@ -8,15 +8,13 @@
   - name: Install MySQL
     sudo: yes
     apt:
-     name: "{{ item }}"
+     name: "{{ item }}" update_cache: yes cache_valid_time: 3600
      state: present
      loop:
       - python-mysqldb
       - mysql-server
       - php5-mysql
-
-      update_cache: yes
-      cache_valid_time: 3600
+      
       
     
   
