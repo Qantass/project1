@@ -1,11 +1,15 @@
 ---
 # tasks file for mysql
 - name: Install MySQL
-    apt: name="{{ item }}" update_cache=yes cache_valid_time=3600 state=latest
+    apt: 
+      name:
+        - python-mysqldb
+        - mysql-server
+      update_cache: yes
+      cache_valid_time: 3600
+      state: latest
     sudo: yes
-    with_items:
-      - python-mysqldb
-      - mysql-server
+    
   
   - name: Start the MySQL service
     sudo: yes
