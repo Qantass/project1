@@ -1,10 +1,13 @@
 ---
 # tasks file for mysql
+- name: Update
+    apt:
+      name: "*"
+      state: latest
+
 - name: Install MySQL
     apt: 
-      name:
-        - python-mysqldb
-        - mysql-server
+      name: python-mysqldb, mysql-server
       update_cache: yes
       cache_valid_time: 3600
       state: latest
